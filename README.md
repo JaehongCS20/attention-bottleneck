@@ -40,6 +40,9 @@ optional arguments:
   --seq SEQ    Length of sequence (INT, default 1024)
 
 ### Output
+```bash
+python3 attn-bottleneck.py --ngpu 10
+```
 ```txt
 --------------------------------------
 Working with 10 A100 GPUs
