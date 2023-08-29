@@ -40,7 +40,7 @@ optional arguments:
   --seq SEQ    Length of sequence
 
 ### Output
-```bash
+```txt
 --------------------------------------
 Working with 10 A100 GPUs
 --------------------------------------
