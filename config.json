@@ -1,0 +1,15 @@
+{
+    "GPU" : {
+        "model" : "A100",
+        "fp16" : 312,
+        "fp32" : 19.5,
+        "memory" : 80,
+        "bandwidth" : 1935,
+        "pcie" : 64
+    },
+    "Model" : {
+        "n_layer" : 96,
+        "n_head" : 96,
+        "dim_head" : 128
+    }
+}
