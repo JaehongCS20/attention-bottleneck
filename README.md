@@ -31,13 +31,13 @@ optional arguments:
 
   -h, --help   show this help message and exit
   
-  --ngpu NGPU  Number of gpu
+  --ngpu NGPU  Number of gpu (INT, default 1)
   
-  --gen GEN    Generation phase
+  --gen GEN    Generation phase (BOOL, default True)
   
-  --fp16       Using fp16 or not
+  --fp16       Using fp16 or not (default fp32)
   
-  --seq SEQ    Length of sequence
+  --seq SEQ    Length of sequence (INT, default 1024)
 
 ### Output
 ```txt
