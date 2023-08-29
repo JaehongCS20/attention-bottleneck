@@ -59,7 +59,7 @@ Total FLOPS: 25067520 FLOPS
 Computation time (FP32):  1.286e-07s
 
 Read Key Matrix (FP32): 96 x (128 x 1023) x 4 = 50282496 bytes
-Memory time:  2.599e-05s
+Memory time:  2.599e-06s
 
 Synchronizing S (FP32): 96 x (1 x 1024) x 4 = 393216 bytes
 Sync time:  6.144e-06s
@@ -74,7 +74,7 @@ Total FLOPS: 25153536 FLOPS
 Computation time (FP32):  1.290e-07s
 
 Read Key Matrix (FP32): 96 x (128 x 1023) x 4 = 50282496 bytes
-Memory time:  2.599e-05s
+Memory time:  2.599e-06s
 
 Synchronizing S (FP32): 96 x (1 x 128) x 4 = 49152 bytes
 Sync time:  7.680e-07s
