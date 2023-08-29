@@ -39,7 +39,7 @@ optional arguments:
   
   --seq SEQ    Length of sequence (INT, default 1024)
 
-  --batch BATCH  Batch size
+  --batch BATCH  Batch size (INT, default 1)
 
 ### Output
 ```bash
