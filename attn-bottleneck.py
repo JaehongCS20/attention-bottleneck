@@ -47,7 +47,7 @@ with open('config.json') as json_file:
             print()
             memory = (n_head * dim_head * (seq_len - 1) * 4)
             print("Read Key Matrix (FP32): %d x (%d x %d) x %d = %d bytes" % (n_head, dim_head, (seq_len - 1), 4, memory))
-            print("Memory time: %ss" % format(memory/(data["GPU"]["bandwidth"]*10**9), '10.3e'))
+            print("Memory time: %ss" % format(memory/(data["GPU"]["bandwidth"]*10**9)/ngpu, '10.3e'))
             print()
             latency = flops/(data["GPU"]["fp32"])
 
@@ -64,7 +64,7 @@ with open('config.json') as json_file:
             print()
             memory = (n_head * dim_head * (seq_len - 1) * 2)
             print("Read Key Matrix (FP16): %d x (%d x %d) x %d = %d bytes" % (n_head, dim_head, (seq_len - 1), 2, memory))
-            print("Memory time: %ss" % format(memory/(data["GPU"]["bandwidth"]*10**9), '10.3e'))
+            print("Memory time: %ss" % format(memory/(data["GPU"]["bandwidth"]*10**9)/ngpu, '10.3e'))
             print()
             latency = flops/(data["GPU"]["fp16"])
             
@@ -90,7 +90,7 @@ with open('config.json') as json_file:
             print()
             memory = (n_head * dim_head * (seq_len - 1) * 4)
             print("Read Key Matrix (FP32): %d x (%d x %d) x %d = %d bytes" % (n_head, dim_head, (seq_len - 1), 4, memory))
-            print("Memory time: %ss" % format(memory/(data["GPU"]["bandwidth"]*10**9), '10.3e'))
+            print("Memory time: %ss" % format(memory/(data["GPU"]["bandwidth"]*10**9)/ngpu, '10.3e'))
             print()
             latency = flops/(data["GPU"]["fp32"])
 
@@ -114,7 +114,7 @@ with open('config.json') as json_file:
             if ngpu > 1: # larger than 1, need synchronizing
                 sync_mem = n_head * dim_head * 2
                 print("Synchronizing S (FP16): %d x (%d x %d) x %d = %d bytes" % (n_head, 1, dim_head, 2, sync_mem))
-                print("Sync time: %ss" % format(sync_mem / (data["GPU"]["pcie"]*10**9), '10.3e'))
+                print("Sync time: %ss" % format(sync_mem / (data["GPU"]["pcie"]*10**9)/ngpu, '10.3e'))
                 sync = latency + sync_mem / (data["GPU"]["pcie"]/10**3)
                 print()
                 print("Bandwidth Requirement (with sync): %.3f TB/s" % (memory/sync))
