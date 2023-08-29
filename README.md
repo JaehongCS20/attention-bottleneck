@@ -76,7 +76,7 @@ Computation time (FP32):  1.290e-07s
 Read Key Matrix (FP32): 96 x (128 x 1023) x 4 = 50282496 bytes
 Memory time:  2.599e-06s
 
-Synchronizing S (FP32): 96 x (1 x 128) x 4 = 49152 bytes
+Synchronizing Attn (FP32): 96 x (1 x 128) x 4 = 49152 bytes
 Sync time:  7.680e-07s
 
 Bandwidth Requirement (with sync): 24.434 TB/s
