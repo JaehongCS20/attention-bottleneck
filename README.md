@@ -24,7 +24,7 @@
 ### Run the program with arguments
 
 ```bash
-attn-bottleneck.py [-h] [--ngpu NGPU] [--gen GEN] [--fp16] [--seq SEQ]
+attn-bottleneck.py [-h] [--ngpu NGPU] [--gen GEN] [--fp16] [--seq SEQ] [--batch BATCH]
 ```
 
 optional arguments:
@@ -38,6 +38,8 @@ optional arguments:
   --fp16       Using fp16 or not (default fp32)
   
   --seq SEQ    Length of sequence (INT, default 1024)
+
+  --batch BATCH  Batch size
 
 ### Output
 ```bash
