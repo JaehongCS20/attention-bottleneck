@@ -96,7 +96,7 @@ with open('config.json') as json_file:
 
             if ngpu > 1: # larger than 1, need synchronizing
                 sync_mem = n_head * dim_head * 4
-                print("Synchronizing S (FP32): %d x (%d x %d) x %d = %d bytes" % (n_head, 1, dim_head, 4, sync_mem))
+                print("Synchronizing Attn (FP32): %d x (%d x %d) x %d = %d bytes" % (n_head, 1, dim_head, 4, sync_mem))
                 print("Sync time: %ss" % format(sync_mem / (data["GPU"]["pcie"]*10**9), '10.3e'))
                 sync = latency + sync_mem / (data["GPU"]["pcie"]/10**3)
                 print()
@@ -113,7 +113,7 @@ with open('config.json') as json_file:
 
             if ngpu > 1: # larger than 1, need synchronizing
                 sync_mem = n_head * dim_head * 2
-                print("Synchronizing S (FP16): %d x (%d x %d) x %d = %d bytes" % (n_head, 1, dim_head, 2, sync_mem))
+                print("Synchronizing Attn (FP16): %d x (%d x %d) x %d = %d bytes" % (n_head, 1, dim_head, 2, sync_mem))
                 print("Sync time: %ss" % format(sync_mem / (data["GPU"]["pcie"]*10**9)/ngpu, '10.3e'))
                 sync = latency + sync_mem / (data["GPU"]["pcie"]/10**3)
                 print()
