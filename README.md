@@ -1,7 +1,7 @@
 # attention-bottleneck
  Calculating attention bottleneck for LLM(GPT)
 
-### Set the config of the GPU and LLM model
+## Set the config of the GPU and LLM model
 
 ```json
 {
@@ -21,14 +21,14 @@
 }
 ```
 
-### Run the program with arguments
+## Run the program with arguments
 
-# To run only attention layer
+### To run only attention layer
 ```bash
 attn-bottleneck.py [-h] [--ngpu NGPU] [--gen GEN] [--fp16] [--seq SEQ] [--batch BATCH]
 ```
 
-# To run total model
+### To run total model
 ```bash
 total-bottleneck.py [-h] [--ngpu NGPU] [--gen GEN] [--fp16] [--seq SEQ] [--batch BATCH]
 ```
