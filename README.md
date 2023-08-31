@@ -23,8 +23,14 @@
 
 ### Run the program with arguments
 
+# To run only attention layer
 ```bash
 attn-bottleneck.py [-h] [--ngpu NGPU] [--gen GEN] [--fp16] [--seq SEQ] [--batch BATCH]
+```
+
+# To run total model
+```bash
+total-bottleneck.py [-h] [--ngpu NGPU] [--gen GEN] [--fp16] [--seq SEQ] [--batch BATCH]
 ```
 
 optional arguments:
