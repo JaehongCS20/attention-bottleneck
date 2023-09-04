@@ -12,7 +12,7 @@ args = parser.parse_args()
 # print(args)
 ngpu = int(args.ngpu)
 gen = args.gen
-seq_len = args.seq
+seq_len = int(args.seq)
 fp16 = args.fp16
 batch = int(args.batch)
 
@@ -91,7 +91,7 @@ with open('config.json') as json_file:
             print("Computation time (FP32): %ss" % format(flops/(data["GPU"]["fp32"]*10**12)/ngpu, '10.3e'))
             print()
             memory = batch * (n_head * dim_head * (seq_len - 1) * 4)
-            print("Read Key Matrix (FP32): %d x %d x (%d x %d) x %d = %d bytes" % (batch, n_head, dim_head, (seq_len - 1), 4, memory))
+            print("Read Value Matrix (FP32): %d x %d x (%d x %d) x %d = %d bytes" % (batch, n_head, dim_head, (seq_len - 1), 4, memory))
             print("Memory time: %ss" % format(memory/(data["GPU"]["bandwidth"]*10**9)/ngpu, '10.3e'))
             print()
             latency = flops/(data["GPU"]["fp32"])
@@ -108,7 +108,7 @@ with open('config.json') as json_file:
             print("Computation time (FP16): %ss" % format(flops/(data["GPU"]["fp16"]*10**12)/ngpu, '10.3e'))
             print()
             memory = batch * (n_head * dim_head * (seq_len - 1) * 2)
-            print("Read Key Matrix (FP16): %d x %d x (%d x %d) x %d = %d bytes" % (batch, n_head, dim_head, (seq_len - 1), 2, memory))
+            print("Read Value Matrix (FP16): %d x %d x (%d x %d) x %d = %d bytes" % (batch, n_head, dim_head, (seq_len - 1), 2, memory))
             print("Memory time: %ss" % format(memory/(data["GPU"]["bandwidth"]*10**9), '10.3e'))
             print()
             latency = flops/(data["GPU"]["fp16"])
