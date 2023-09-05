@@ -28,11 +28,6 @@
 attn-bottleneck.py [-h] [--ngpu NGPU] [--gen GEN] [--fp16] [--seq SEQ] [--batch BATCH]
 ```
 
-### To run total model
-```bash
-total-bottleneck.py [-h] [--ngpu NGPU] [--gen GEN] [--fp16] [--seq SEQ] [--batch BATCH]
-```
-
 optional arguments:
 
   -h, --help   show this help message and exit
