@@ -20,7 +20,7 @@ print("==========INIT PAHSE==========")
 print()
 # QKV
 flops_qkv = batch * seq * emb * (2*emb - 1) * 3
-memory_qkv = batch * ((seq * emb) * 4 + (emb * emb) * 4 * 3)
+memory_qkv = batch * (seq * emb) * 4 + (emb * emb) * 4 * 3
 print("QKV")
 print("Computation time (FP32): %ss" % format(flops_qkv/(19.5*10**12), '10.3e'))
 print("Memory time: %ss" % format(memory_qkv/(2**30)/1935, '10.3e'))
@@ -44,7 +44,7 @@ print()
 
 # add norm
 flops_add = batch * (seq * emb * (2*emb - 1))
-memory_add = batch * ((seq * emb) * 4 + (emb * emb) * 4)
+memory_add = batch * (seq * emb) * 4 + (emb * emb) * 4
 print("Add Norm")
 print("Computation time (FP32): %ss" % format(flops_add/(19.5*10**12), '10.3e'))
 print("Memory time: %ss" % format(memory_add/(2**30)/1935, '10.3e'))
@@ -52,7 +52,7 @@ print()
 
 # ffn
 flops_ffn = batch * (seq * ffn * (2*emb - 1) + 1 * emb * (2*ffn - 1))
-memory_ffn = batch * ((seq * emb) * 4 + (emb * ffn) * 4 + (seq * ffn) * 4 + (ffn * emb) * 4)
+memory_ffn = batch * (seq * emb) * 4 + (emb * ffn) * 4 + batch * (seq * ffn) * 4 + (ffn * emb) * 4
 
 print("FFN")
 print("Computation time (FP32): %ss" % format(flops_ffn/(19.5*10**12), '10.3e'))
@@ -91,7 +91,7 @@ for i in range(1, out):
     seq = 512 + i
     # QKV
     flops_qkv += batch * (1 * emb * (2*emb - 1) * 3)
-    memory_qkv += batch * ((1 * emb) * 4 + (emb * emb) * 4 * 3)
+    memory_qkv += batch * (1 * emb) * 4 + (emb * emb) * 4 * 3
 
     # Q * K
     flops_qk += batch * (1 * seq * (2*dim - 1) * head)
@@ -103,11 +103,11 @@ for i in range(1, out):
 
     # add norm
     flops_add += batch * (1 * emb * (2*emb - 1))
-    memory_add += batch * ((1 * emb) * 4 + (emb * emb) * 4)
+    memory_add += batch * (1 * emb) * 4 + (emb * emb) * 4
 
     # ffn
     flops_ffn += batch * (1 * ffn * (2*emb - 1) + 1 * emb * (2*ffn - 1))
-    memory_ffn += batch * ((1 * emb) * 4 + (emb * ffn) * 4 + (1 * ffn) * 4 + (ffn * emb) * 4)
+    memory_ffn += batch * (1 * emb) * 4 + (emb * ffn) * 4 + batch * (1 * ffn) * 4 + (ffn * emb) * 4
 
 print("QKV")
 print("Computation time (FP32): %ss" % format(flops_qkv/(19.5*10**12), '10.3e'))
