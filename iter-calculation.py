@@ -33,32 +33,32 @@ print()
 flops_qkv = batch * seq * emb * (2*emb - 1) * 3
 memory_qkv = batch * (seq * emb) * 4 + (emb * emb) * 4 * 3
 print("QKV")
-print("Computation time (FP32): %ss" % format(flops_qkv/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_qkv/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_qkv/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_qkv/(2**30)/GB_bandwidth*(10**3)))
 print()
 
 # Q * K
 flops_qk = batch * seq * seq * (2*dim - 1) * head
 memory_qk = batch * ((seq * dim) * 4 * head + (dim * seq) * 4 * head)
 print("QK")
-print("Computation time (FP32): %ss" % format(flops_qk/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_qk/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_qk/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_qk/(2**30)/GB_bandwidth*(10**3)))
 print()
 
 # S * V
 flops_sv =  batch * seq * dim * (2*seq - 1) * head
 memory_sv = batch * ((seq * seq) * 4 * head + (seq * dim) * 4 * head)
 print("SV")
-print("Computation time (FP32): %ss" % format(flops_sv/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_sv/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_sv/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_sv/(2**30)/GB_bandwidth*(10**3)))
 print()
 
 # add norm
 flops_add = batch * (seq * emb * (2*emb - 1))
 memory_add = batch * (seq * emb) * 4 + (emb * emb) * 4
 print("Add Norm")
-print("Computation time (FP32): %ss" % format(flops_add/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_add/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_add/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_add/(2**30)/GB_bandwidth*(10**3)))
 print()
 
 # ffn
@@ -66,24 +66,24 @@ flops_ffn = batch * (seq * ffn * (2*emb - 1) + 1 * emb * (2*ffn - 1))
 memory_ffn = batch * (seq * emb) * 4 + (emb * ffn) * 4 + batch * (seq * ffn) * 4 + (ffn * emb) * 4
 
 print("FFN")
-print("Computation time (FP32): %ss" % format(flops_ffn/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_ffn/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_ffn/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_ffn/(2**30)/GB_bandwidth*(10**3)))
 print()
 
 flops += flops_qkv + flops_qk + flops_sv + flops_add + flops_ffn
 memory += memory_qkv + memory_qk + memory_sv + memory_add + memory_ffn
 
-ct = flops/(T_flops*10**12)
-print("Init Computation time (FP32): %ss" % format(ct, '10.3e'))
+ct = flops/(T_flops*10**9)
+print("Init Computation time (FP32): %.3fms" % ct)
 memory /= 2**30
-mt = memory/GB_bandwidth
-print("Init Memory time: %ss" % format(mt, '10.3e'))
+mt = memory/GB_bandwidth*(10**3)
+print("Init Memory time: %.3fms" % mt)
 
 # print("Total Computation time (FP32): %ss" % format(ct * 96, '10.3e'))
 # print("Total Memory time: %ss" % format(mt * 96, '10.3e'))
 
-print("Init Memory qkv + qk + sv : %f GB" % ((memory_qkv + memory_qk + memory_sv)/(2**30)))
-print("Init Memory ffn : %f GB" % ((memory_ffn)/(2**30)))
+print("Init Memory qkv + qk + sv : %.2f GB" % ((memory_qkv + memory_qk + memory_sv)/(2**30)))
+print("Init Memory ffn : %.2f GB" % ((memory_ffn)/(2**30)))
 
 print()
 print("==========GEN PAHSE==========")
@@ -121,37 +121,37 @@ for i in range(1, out):
     memory_ffn += batch * (1 * emb) * 4 + (emb * ffn) * 4 + batch * (1 * ffn) * 4 + (ffn * emb) * 4
 
 print("QKV")
-print("Computation time (FP32): %ss" % format(flops_qkv/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_qkv/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_qkv/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_qkv/(2**30)/GB_bandwidth*(10**3)))
 print()
 print("QK")
-print("Computation time (FP32): %ss" % format(flops_qk/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_qk/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_qk/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_qk/(2**30)/GB_bandwidth*(10**3)))
 print()
 print("SV")
-print("Computation time (FP32): %ss" % format(flops_sv/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_sv/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_sv/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_sv/(2**30)/GB_bandwidth*(10**3)))
 print()
 print("Add Norm")
-print("Computation time (FP32): %ss" % format(flops_add/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_add/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_add/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_add/(2**30)/GB_bandwidth*(10**3)))
 print()
 print("FFN")
-print("Computation time (FP32): %ss" % format(flops_ffn/(T_flops*10**12), '10.3e'))
-print("Memory time: %ss" % format(memory_ffn/(2**30)/GB_bandwidth, '10.3e'))
+print("Computation time (FP32): %.3fms" % (flops_ffn/(T_flops*10**9)))
+print("Memory time: %.3fms" % (memory_ffn/(2**30)/GB_bandwidth*(10**3)))
 print()
 
 flops += flops_qkv + flops_qk + flops_sv + flops_add + flops_ffn
 memory += memory_qkv + memory_qk + memory_sv + memory_add + memory_ffn
 
-ct = flops/(T_flops*10**12)
-print("Gen Computation time (FP32): %ss" % format(ct, '10.3e'))
+ct = flops/(T_flops*10**9)
+print("Gen Computation time (FP32): %.3fms" % ct)
 memory /= 2**30
-mt = memory/GB_bandwidth
-print("Gen Memory time: %ss" % format(mt, '10.3e'))
+mt = memory/GB_bandwidth*(10**3)
+print("Gen Memory time: %.3fms" % mt)
 
 # print("Total Computation time (FP32): %ss" % format(ct * 96, '10.3e'))
 # print("Total Memory time: %ss" % format(mt * 96, '10.3e'))
 
-print("Gen Memory qkv + qk + sv : %f GB" % ((memory_qkv + memory_qk + memory_sv)/(2**30)))
-print("Gen Memory ffn : %f GB" % ((memory_ffn)/(2**30)))
+print("Gen Memory qkv + qk + sv : %.2f GB" % ((memory_qkv + memory_qk + memory_sv)/(2**30)))
+print("Gen Memory ffn : %.2f GB" % ((memory_ffn)/(2**30)))
